@@ -17,4 +17,6 @@ The ESP8266 conceptually supports up to four "sockets" which are really just dat
 
 There is a simpl listener console App too that can listen for a connection request from the ESP8266 and then randomly sends random blocks of data to the device which is passed into handlers exposed by he class library.
 
+As already mentioned the code that "wraps" the device is not portable, it is managed and requires a system that can run that. This code is not intended to be used as-is by embedded systems but rather serve as a rich easily debuggable code base that can be used to identify, isolate and understand subtle issues that might be very time consuming to understand when encountered in a microcontroller environment.
+
 
