@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiESP8266Testing", "WiFiESP8266Testing\WiFiESP8266Testing.csproj", "{DC366839-C1C7-4C45-ACB5-9990A587AE50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steadsoft.Devices.WiFi.ESP8266", "Steadsoft.Devices.ESP8266\Steadsoft.Devices.WiFi.ESP8266.csproj", "{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steadsoft.UnitTests.RingBuffer", "Tests\Steadsoft.UnitTests.RingBuffer.csproj", "{16C3D940-93BF-4ECE-BB39-3F42804925E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D38E1DED-8076-4A1B-8DAC-0DD69BDBD867}
+	EndGlobalSection
+EndGlobal

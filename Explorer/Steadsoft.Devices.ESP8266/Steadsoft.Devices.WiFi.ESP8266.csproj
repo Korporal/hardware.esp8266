@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Steadsoft.Devices.WiFi.ESP8266</RootNamespace>
+    <AssemblyName>Steadsoft.Devices.WiFi.ESP8266</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NO_INTEGRITY_CHECKING</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Classes\AccessPoint.cs" />
+    <Compile Include="Classes\ArgumentGuard.cs" />
+    <Compile Include="Classes\Basic.cs" />
+    <Compile Include="Classes\FastAsyncResult.cs" />
+    <Compile Include="Classes\Packet.cs" />
+    <Compile Include="Classes\RingBuffer.cs" />
+    <Compile Include="Classes\ComPort.cs" />
+    <Compile Include="Classes\ComPortReceiveEventArgs.cs" />
+    <Compile Include="Classes\ComPortSettings.cs" />
+    <Compile Include="Classes\ESP8266.cs" />
+    <Compile Include="Classes\ResponseLine.cs" />
+    <Compile Include="Classes\SocketReceiveArgs.cs" />
+    <Compile Include="Classes\StationInfo.cs" />
+    <Compile Include="Classes\TcpIp.cs" />
+    <Compile Include="Classes\WiFi.cs" />
+    <Compile Include="Classes\WiFiConnectEventArgs.cs" />
+    <Compile Include="Enums\AccessPointEncryption.cs" />
+    <Compile Include="Enums\AccessPointOptions.cs" />
+    <Compile Include="Enums\IPAddressKind.cs" />
+    <Compile Include="Enums\ResponseSentinel.cs" />
+    <Compile Include="Enums\SocketConnectMode.cs" />
+    <Compile Include="Enums\Update.cs" />
+    <Compile Include="Enums\WiFiMode.cs" />
+    <Compile Include="Enums\WiFiStatus.cs" />
+    <Compile Include="Interfaces\IAsyncIO.cs" />
+    <Compile Include="Interfaces\IFastAsyncResult.cs" />
+    <Compile Include="Interfaces\IRingBufferLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statics\ATCommands.cs" />
+    <Compile Include="Statics\Constants.cs" />
+    <Compile Include="Statics\FastIODelegates.cs" />
+    <Compile Include="Statics\ResponseStrings.cs" />
+    <Compile Include="Statics\ResultPrefix.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
