@@ -19,4 +19,4 @@ There is a simpl listener console App too that can listen for a connection reque
 
 As already mentioned the code that "wraps" the device is not portable, it is managed and requires a system that can run that. This code is not intended to be used as-is by embedded systems but rather serve as a rich easily debuggable code base that can be used to identify, isolate and understand subtle issues that might be very time consuming to understand when encountered in a microcontroller environment.
 
-
+The goal with this is therefore to supoport the creation of refence code that can be used to develop robust native code for leveraging this versatile device.
