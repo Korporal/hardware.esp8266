@@ -181,7 +181,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
                     case ResponseSentinel.ERROR:
                     case ResponseSentinel.FAIL:
                         {
-                            results.Add(new InvalidOperationException($"The device returned '{sentinel}' while processing the request for content: {matching_string}"));
+                            results.Add($"The device returned '{sentinel}' while processing the request for content: {matching_string}");
                             Args.Busy = false;
                             callCompleted.Set(); // wake if thread is waiting.
                             break;

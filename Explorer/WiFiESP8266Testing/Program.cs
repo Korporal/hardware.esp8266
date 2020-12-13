@@ -47,7 +47,7 @@ namespace WiFiESP8266Testing
 
                 device.Start();
 
-                device.Basic.GetFreeRam();
+                var ram = device.Basic.GetFreeRam();
 
                 device.Basic.Restart();
 
