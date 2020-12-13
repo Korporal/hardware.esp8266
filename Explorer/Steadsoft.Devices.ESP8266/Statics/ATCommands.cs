@@ -7,10 +7,12 @@
             internal const string ATE0 = "ATE0";
             internal const string ATE1 = "ATE1";
             internal const string RESTART = "AT+RST";
+            internal const string RESTORE = "AT+RESTORE";
             internal const string UPDATE_FIRMWARE = "AT+CIUPDATE";
             internal const string GET_VERSION_INFO = "AT+GMR";
             internal const string GET_FREE_RAM = "AT+SYSRAM?";
             internal const string GET_ADC_VALUE = "AT+SYSADC?";
+            internal const string SET_SLEEP_MODE = "AT+SLEEP=";
             /// <summary>
             /// Defines commands that result in the device's flash memory being updated.
             /// </summary>

@@ -10,6 +10,19 @@ namespace Steadsoft.Devices.WiFi.ESP8266
         {
             device = Device;
         }
+
+        public void SetSleepMode(SleepMode Mode)
+        {
+            try
+            {
+                device.Execute($"{AT.BasicCommands.SET_SLEEP_MODE}{(int)Mode}", OK);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
+
         public string[] GetVersionInfo()
         {
             try
@@ -46,6 +59,20 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             {
                 device.results.Clear();
             }
+        }
+
+        public string[] FactoryReset()
+        {
+            try
+            {
+                device.Execute(AT.BasicCommands.RESTORE, READY);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+
         }
 
         public string[] Restart()

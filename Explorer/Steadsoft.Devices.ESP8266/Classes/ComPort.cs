@@ -60,6 +60,10 @@ namespace Steadsoft.Devices.WiFi.ESP8266
                 busy = args.Busy;
                 stop = args.Stop;
             }
+            catch (Exception e)
+            {
+                ;
+            }
             finally
             {
                 if (!stop)

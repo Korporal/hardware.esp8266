@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 
 namespace Steadsoft.Devices.WiFi.ESP8266
 {
@@ -11,7 +12,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
 
             string[] responses = new string[Source.Count];
             Source.CopyTo(responses);
-            return responses;
+            return responses.Select(text => text.Trim('\r', '\n')).ToArray(); ;
         }
     }
 }

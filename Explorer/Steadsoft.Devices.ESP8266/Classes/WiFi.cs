@@ -14,6 +14,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             device = Device;
         }
 
+
         public void SetWiFiMode(WiFiMode Mode)
         {
             try
@@ -34,6 +35,22 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             try
             {
                 device.Execute($"{AT.WiFiCommands.NO_FLASH.CONNECT_TO_ACCESS_POINT}{device.Port.Settings.QuoteChar}{StationID}{device.Port.Settings.QuoteChar},{device.Port.Settings.QuoteChar}{Password}{device.Port.Settings.QuoteChar}", "OK");
+
+                if (device.results.Count > 0)
+                    if (device.results[0] != null)
+                        {
+                        if (device.results[0].ToString().Contains("CWJAP:1"))
+                            throw new TimeoutException();
+                        if (device.results[0].ToString().Contains("CWJAP:2"))
+                            throw new InvalidOperationException("Bad password");
+                        if (device.results[0].ToString().Contains("CWJAP:3"))
+                            throw new InvalidOperationException($"Access point '{StationID}' was not found");
+                        if (device.results[0].ToString().Contains("CWJAP:4"))
+                            throw new InvalidOperationException("The connection failed");
+                    }
+
+
+                // replies like CWJAP:n are error info and n can be 1,2,3 or 4
             }
             finally
             {

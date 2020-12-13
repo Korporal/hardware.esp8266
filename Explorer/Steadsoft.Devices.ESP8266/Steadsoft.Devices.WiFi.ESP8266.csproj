@@ -60,6 +60,7 @@
     <Compile Include="Enums\AccessPointEncryption.cs" />
     <Compile Include="Enums\AccessPointOptions.cs" />
     <Compile Include="Enums\IPAddressKind.cs" />
+    <Compile Include="Enums\public enum SleepMode.cs" />
     <Compile Include="Enums\ResponseSentinel.cs" />
     <Compile Include="Enums\SocketConnectMode.cs" />
     <Compile Include="Enums\Update.cs" />

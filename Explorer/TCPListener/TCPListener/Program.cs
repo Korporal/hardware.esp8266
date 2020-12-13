@@ -28,11 +28,12 @@ namespace ServerTest
 
             listener.Start();  // this will start the server
 
-            Console.WriteLine("Started listening for connection requests on: " + listener.LocalEndpoint.ToString());
 
             while (true)   //we wait for a connection
             {
-                using (TcpClient client = listener.AcceptTcpClient())                //if a connection exists, the server will accept it
+                Console.WriteLine("Started listening for connection requests on: " + listener.LocalEndpoint.ToString());
+
+               using (TcpClient client = listener.AcceptTcpClient())                //if a connection exists, the server will accept it
 
                 {
                     Console.WriteLine($"{Time} - connection established on: " + client.Client.LocalEndPoint.ToString());

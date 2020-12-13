@@ -11,7 +11,7 @@ namespace WiFiESP8266Testing
 {
     class Program
     {
-        private static ESP8266 wifi;
+        private static ESP8266 device;
 
         static void Main(string[] args)
         {
@@ -33,72 +33,62 @@ namespace WiFiESP8266Testing
                     ReceiveBufferCapacity = 4096,
                     QuoteChar = "|",
                     BusyWaitPeriod = 1,
-                    PostWriteDelay = 0
+                    PostWriteDelay = 1
                 };
 
                 ComPort port = new ComPort(args[0], settings);
 
-                wifi = new ESP8266(port); //, 4096 * 2);
+                device = new ESP8266(port); //, 4096 * 2);
 
-                wifi.StartLogging();
+                //wifi.StartLogging();
 
-                wifi.ConnectionChanged += OnConnectionChanged;
-                wifi.SocketReceive += OnSocketReceive;
+                device.ConnectionChanged += OnConnectionChanged;
+                device.SocketReceive += OnSocketReceive;
 
-                wifi.Start();
+                device.Start();
 
-                //var info = wifi.Restart();
+                device.Basic.GetFreeRam();
 
-                wifi.Basic.DisableEcho();
+                device.Basic.Restart();
 
-                //var adc = wifi.Basic.GetADCValue();
+                var info = device.Basic.GetVersionInfo();
 
-                //var ram = wifi.Basic.GetFreeRam();
+                device.Basic.DisableEcho();
 
-                ////var adc = wifi.GetADCValue();
+                device.Basic.SetSleepMode(SleepMode.Disabled);
 
-                ////var ram = wifi.GetFreeRam();
+                device.WiFi.SetWiFiMode(WiFiMode.Station);
 
-                //var ver = wifi.Basic.GetVersionInfo();
-
-                wifi.WiFi.SetWiFiMode(WiFiMode.Dual);
-
-                //for (int I = 0; I < 100; I++)
-                //{
-
-                var points = wifi.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true).OrderByDescending(point => point.SignalStrength);
+                var points = device.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true).OrderByDescending(point => point.SignalStrength);
 
 
-                wifi.WiFi.ConnectToNetwork(args[1], args[2]);
-
-                for (int x = 0; x < 100; x++)
+                for (int X=0; X < 100; X++)
                 {
-                    wifi.Basic.UpdateFirmware(Update.FindServer);
-                    Thread.Sleep(1000);
+                    try
+                    {
+                        device.WiFi.ConnectToNetwork(args[1], args[2]);
+                        break;
+                    }
+                    catch (TimeoutException)
+                    {
+                        continue;
+                    }
                 }
 
+                device.TcpIp.SetConnectMode(SocketConnectMode.SingleConnection);
 
-                wifi.TcpIp.SetConnectMode(SocketConnectMode.SingleConnection);
-
-                wifi.TcpIp.ConnectSocket("192.168.0.19", 4567);
-
-                //points = wifi.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true);
-
-                //ips = wifi.WiFi.GetCurrentIPInfo();
-
-                //wifi.WiFi.DisconnectFromNetwork();
+                device.TcpIp.ConnectSocket("192.168.0.19", 4567);
 
                 Thread.Sleep(1);
-                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            var logdata = wifi.PeekLog();
+            //var logdata = wifi.PeekLog();
 
-            File.WriteAllBytes("raw_log.log", logdata);
+            //File.WriteAllBytes("raw_log.log", logdata);
 
             Thread.Sleep(-1);
         }
