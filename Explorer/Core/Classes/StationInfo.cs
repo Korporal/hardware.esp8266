@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using static Steadsoft.ESP8266.Constants;
 
 namespace Steadsoft.ESP8266
 {
@@ -25,7 +26,7 @@ namespace Steadsoft.ESP8266
 
             var ip = IPAddress.Parse(parts[0]);
 
-            return new StationInfo(ip, parts[1].TrimEnd('\r','\n'));
+            return new StationInfo(ip, parts[1].TrimEnd(Chars.CR, Chars.LF));
         }
     }
 }

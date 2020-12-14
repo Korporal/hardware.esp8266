@@ -2,6 +2,7 @@
 using System;
 using System.IO.Ports;
 using System.Threading;
+using static Steadsoft.ESP8266.Constants;
 
 namespace Steadsoft.ESP8266
 {
@@ -79,7 +80,7 @@ namespace Steadsoft.ESP8266
         public void Send(string Text)
         {
             if (Settings.QuoteChar != null)
-               Text = Text.Replace(quoteChar, '"');
+               Text = Text.Replace(quoteChar, Chars.QUOTE);
 
             while (busy) Thread.Sleep(Settings.BusyWaitPeriod);
             busy = true;
@@ -90,7 +91,7 @@ namespace Steadsoft.ESP8266
         }
         internal void SendLine(string Text)
         {
-            Send(Text + '\r' + '\n');
+            Send(Text + Chars.CR + Chars.LF);
         }
         public void Open()
         {

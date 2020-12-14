@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using static Steadsoft.ESP8266.Constants;
 using static Steadsoft.ESP8266.ResultPrefix;
 
 namespace Steadsoft.ESP8266
@@ -15,12 +16,12 @@ namespace Steadsoft.ESP8266
 
             Description = Description.Replace(@"""","");
 
-            int lpar = Description.IndexOf('(');
-            int rpar = Description.IndexOf(')');
+            int lpar = Description.IndexOf(Chars.LPAR);
+            int rpar = Description.IndexOf(Chars.RPAR);
 
             string raw = Description[(lpar + 1)..rpar];
 
-            var parts = raw.Split(',');
+            var parts = raw.Split(Chars.COMMA);
 
             int sub = 0;
 

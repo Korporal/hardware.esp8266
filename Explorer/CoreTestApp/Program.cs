@@ -103,7 +103,7 @@ namespace WiFiESP8266Testing
         }
         private static void OnSocketReceive(object Sender, SocketReceiveEventArgs Args)
         {
-            Debug.WriteLine(Args.Length);
+            Debug.WriteLine(Args.Packet.Length);
         }
         private static void OnConnectionChanged(object Sender, WiFiConnectEventArgs Args)
         {

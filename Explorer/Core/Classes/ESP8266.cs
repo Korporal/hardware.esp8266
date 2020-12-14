@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using static Steadsoft.ESP8266.Constants;
-using static Steadsoft.ESP8266.Constants.Chars;
 using static Steadsoft.ESP8266.ResponseStrings;
 
 namespace Steadsoft.ESP8266
@@ -213,7 +212,7 @@ namespace Steadsoft.ESP8266
                             if (SocketReceive.GetInvocationList().Length == 0)
                                 receive_buffers[p.LinkID].Write(p.Data);
                             else
-                                SocketReceive(this, new SocketReceiveEventArgs() { LinkID = p.LinkID, Length = p.Data.Length, Buffer = p.Data });
+                                SocketReceive(this, new SocketReceiveEventArgs() { Packet = p });
                             Debug.WriteLine($"Received IP Data: [{matching_string.TrimEnd('\n').TrimEnd('\r')}] current ring buffer length: [{receive_buffers[p.LinkID].UsedBytes}] ({receive_buffers[p.LinkID].FreeBytes} bytes free, {receive_buffers[p.LinkID].PeakLength} peak).");
                             break;
                         }
@@ -280,13 +279,13 @@ namespace Steadsoft.ESP8266
 
                 if (RingBuffer.BeginsWith(IPD))
                 {
-                    if (RingBuffer.TryFindBytes(out var ml, COLON))
+                    if (RingBuffer.TryFindBytes(out var ml, Bytes.COLON))
                     {
                         var msg = RingBuffer.Peek(ml);
 
                         var text = Encoding.Default.GetString(msg);
 
-                        var parts = text.Split(',', ':');
+                        var parts = text.Split(Chars.COMMA, Chars.COLON);
 
                         if (parts.Length == 3)
                         {

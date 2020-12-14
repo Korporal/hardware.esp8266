@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using static Steadsoft.ESP8266.Constants;
 using static Steadsoft.ESP8266.ResponseStrings;
 using static Steadsoft.ESP8266.ResultPrefix;
 
@@ -19,7 +20,7 @@ namespace Steadsoft.ESP8266
             try
             {
                 device.Execute($"{AT.WiFiCommands.GET_STATION_NAME}", OK);
-                return ResponseLine.CopyResponses(device.results)[0].Split(':')[1];
+                return ResponseLine.CopyResponses(device.results)[0].Split(Chars.COLON)[1];
             }
             finally
             {
@@ -98,9 +99,9 @@ namespace Steadsoft.ESP8266
 
                     if (!text.StartsWith(CIPSTA_CUR)) throw new ArgumentException($"The {nameof(text)} must start with '{CIPSTA_CUR}'.");
 
-                    var parts = text.Split('"');
+                    var parts = text.Split(Chars.QUOTE);
 
-                    var kind = Enum.Parse(typeof(IPAddressKind), parts[0].Split(':')[1], true);
+                    var kind = Enum.Parse(typeof(IPAddressKind), parts[0].Split(Chars.COLON)[1], true);
 
                     ips[(int)kind] = IPAddress.Parse(parts[1]);
                 }

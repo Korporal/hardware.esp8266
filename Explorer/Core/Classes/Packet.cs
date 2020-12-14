@@ -1,7 +1,16 @@
 ﻿using System;
+using static Steadsoft.ESP8266.Constants;
 
 namespace Steadsoft.ESP8266
 {
+    /// <summary>
+    /// Represents an ESP8266 'IPD' data packet.
+    /// </summary>
+    /// <remarks>
+    /// IP data sent over the WiFi network via an ESP8266 consists of simple messages that contain
+    /// the 'IPD' sentinel characters and a length. This information is extracted and used to create
+    /// a more conveninent representation for subsequent processing by the application.
+    /// </remarks>
     public class Packet
     {
         public int LinkID { get; private set; } // -1 means no link id - system is in single connection mode.
@@ -16,7 +25,7 @@ namespace Steadsoft.ESP8266
 
         public static Packet Create(string Message, byte[] data)
         {
-            var parts = Message.Split(',', ':');
+            var parts = Message.Split(Chars.COMMA, Chars.COLON);
 
             if (parts.Length != 3 && parts.Length != 4)
                 throw new ArgumentException("The packet data does not have expected structure");

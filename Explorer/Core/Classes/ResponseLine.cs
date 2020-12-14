@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using static Steadsoft.ESP8266.Constants;
 
 namespace Steadsoft.ESP8266
 {
@@ -12,7 +13,7 @@ namespace Steadsoft.ESP8266
 
             string[] responses = new string[Source.Count];
             Source.CopyTo(responses);
-            return responses.Select(text => text.Trim('\r', '\n')).ToArray(); ;
+            return responses.Select(text => text.Trim(Chars.CR, Chars.LF)).ToArray(); ;
         }
     }
 }
