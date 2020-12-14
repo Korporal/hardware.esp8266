@@ -18,7 +18,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             int lpar = Description.IndexOf('(');
             int rpar = Description.IndexOf(')');
 
-            string raw = Description.Substring(lpar + 1, rpar - (lpar + 1));
+            string raw = Description[(lpar + 1)..rpar];
 
             var parts = raw.Split(',');
 

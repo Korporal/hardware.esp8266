@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Steadsoft.Devices
+namespace Steadsoft.IO
 {
     public static class FastIODelegates
     {

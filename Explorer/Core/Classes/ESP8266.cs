@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steadsoft.IO;
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -7,8 +8,6 @@ using System.Threading;
 using static Steadsoft.Devices.WiFi.ESP8266.Constants;
 using static Steadsoft.Devices.WiFi.ESP8266.Constants.Chars;
 using static Steadsoft.Devices.WiFi.ESP8266.ResponseStrings;
-
-[assembly: InternalsVisibleTo("RingBufferTests")]
 
 namespace Steadsoft.Devices.WiFi.ESP8266
 {
@@ -43,7 +42,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
         public event WiFiConnectionEventHandler ConnectionChanged = delegate { };
         public event SocketReceiveEventHandler SocketReceive = delegate { };
         private long invocationCount = 0;
-        private AutoResetEvent callCompleted = new AutoResetEvent(false);
+        private readonly AutoResetEvent callCompleted = new AutoResetEvent(false);
         private string sentinel = ResponseStrings.OK;
 
         internal RingBuffer[] receive_buffers = { new RingBuffer(4096), new RingBuffer(4096), new RingBuffer(4096), new RingBuffer(4096) };

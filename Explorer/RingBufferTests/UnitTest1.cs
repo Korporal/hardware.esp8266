@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Steadsoft.Devices.WiFi.ESP8266;
+using Steadsoft.IO;
 using System;
 
 namespace Steadsoft.UnitTests

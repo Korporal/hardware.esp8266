@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steadsoft.IO;
+using System;
 using System.IO.Ports;
 using System.Threading;
 
@@ -10,9 +11,9 @@ namespace Steadsoft.Devices.WiFi.ESP8266
     public class ComPort : IRingBufferLog, IAsyncIO
     {
         private volatile bool busy; // helps handle the ESP8266's 'busy p...' and 'busy s...' responses.
-        private char quoteChar;
-        private SerialPort port;
-        private RingBuffer receiveBuffer;
+        private readonly char quoteChar;
+        private readonly SerialPort port;
+        private readonly RingBuffer receiveBuffer;
         public ComPortSettings Settings { get; private set; }
 
         public int LogLength => throw new NotImplementedException();
@@ -63,7 +64,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
                 busy = args.Busy;
                 stop = args.Stop;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ;
             }

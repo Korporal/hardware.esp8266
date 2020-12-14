@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Steadsoft.Utility;
+using System;
 using System.Collections;
 using System.Diagnostics;
-using static Steadsoft.Devices.FastIODelegates;
+using System.Runtime.CompilerServices;
+using static Steadsoft.IO.FastIODelegates;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+[assembly: InternalsVisibleTo("RingBufferTests")]
+
+namespace Steadsoft.IO
 {
     /// <summary>
     /// Represents a fixed capacity ring buffer of bytes that may be continuously written to and read from.
@@ -27,7 +31,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
         private int write_offset;
         private ulong bytes_written;
         private ulong bytes_read;
-        private ArrayList log;
+        private readonly ArrayList log;
         /// <summary>
         /// Total number of bytes that have been written to the buffer since it was created or last cleared.
         /// </summary>

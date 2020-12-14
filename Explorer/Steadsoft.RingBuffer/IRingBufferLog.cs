@@ -1,4 +1,4 @@
-﻿namespace Steadsoft.Devices.WiFi.ESP8266
+﻿namespace Steadsoft.IO
 {
     /// <summary>
     /// Represents anything that contains a ring buffer and wishes to expose its logging capabilities.

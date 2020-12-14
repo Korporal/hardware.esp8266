@@ -1,4 +1,5 @@
 ﻿using System;
+using Steadsoft.IO;
 
 namespace Steadsoft.Devices.WiFi.ESP8266
 {

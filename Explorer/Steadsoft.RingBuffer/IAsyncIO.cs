@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Steadsoft.Devices
+namespace Steadsoft.IO
 {
     /// <summary>
     /// Provides access to an object's async begin/end methods for read and write operations.

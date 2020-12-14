@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading;
-using Steadsoft.Devices.WiFi.ESP8266;
 
-namespace Steadsoft.Devices
+namespace Steadsoft.IO
 {
     public class FastAsyncResult : IFastAsyncResult
     {

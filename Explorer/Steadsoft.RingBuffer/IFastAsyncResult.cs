@@ -1,7 +1,6 @@
-﻿using Steadsoft.Devices.WiFi.ESP8266;
-using System;
+﻿using System;
 
-namespace Steadsoft.Devices
+namespace Steadsoft.IO
 {
     public interface IFastAsyncResult : IAsyncResult
     {
