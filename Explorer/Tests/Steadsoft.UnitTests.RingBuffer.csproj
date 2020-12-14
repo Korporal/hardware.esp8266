@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steadsoft.Devices.ESP8266\Steadsoft.Devices.WiFi.ESP8266.csproj">
-      <Project>{130e1cb2-c7f5-4289-8886-8e80efba0eab}</Project>
-      <Name>Steadsoft.Devices.WiFi.ESP8266</Name>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{9aa62149-b217-48d4-93ea-294704236616}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

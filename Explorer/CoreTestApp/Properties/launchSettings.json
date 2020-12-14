@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CoreTestApp": {
+      "commandName": "Project",
+      "commandLineArgs": "COM5 HighChaparral canyongrand"
+    }
+  }
+}

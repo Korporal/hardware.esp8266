@@ -50,11 +50,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Steadsoft.Devices.ESP8266\Steadsoft.Devices.WiFi.ESP8266.csproj">
-      <Project>{130e1cb2-c7f5-4289-8886-8e80efba0eab}</Project>
-      <Name>Steadsoft.Devices.WiFi.ESP8266</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

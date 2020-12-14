@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiESP8266Testing", "WiFiESP8266Testing\WiFiESP8266Testing.csproj", "{DC366839-C1C7-4C45-ACB5-9990A587AE50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{9AA62149-B217-48D4-93EA-294704236616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steadsoft.Devices.WiFi.ESP8266", "Steadsoft.Devices.ESP8266\Steadsoft.Devices.WiFi.ESP8266.csproj", "{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTestApp", "CoreTestApp\CoreTestApp.csproj", "{348549CB-E1AC-422C-9FCB-3C5F06181B6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steadsoft.UnitTests.RingBuffer", "Tests\Steadsoft.UnitTests.RingBuffer.csproj", "{16C3D940-93BF-4ECE-BB39-3F42804925E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingBufferTests", "RingBufferTests\RingBufferTests.csproj", "{AC800C2C-E300-46E7-A162-CA3424F97BF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC366839-C1C7-4C45-ACB5-9990A587AE50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{130E1CB2-C7F5-4289-8886-8E80EFBA0EAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16C3D940-93BF-4ECE-BB39-3F42804925E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA62149-B217-48D4-93EA-294704236616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA62149-B217-48D4-93EA-294704236616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA62149-B217-48D4-93EA-294704236616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA62149-B217-48D4-93EA-294704236616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{348549CB-E1AC-422C-9FCB-3C5F06181B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348549CB-E1AC-422C-9FCB-3C5F06181B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348549CB-E1AC-422C-9FCB-3C5F06181B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348549CB-E1AC-422C-9FCB-3C5F06181B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC800C2C-E300-46E7-A162-CA3424F97BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC800C2C-E300-46E7-A162-CA3424F97BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC800C2C-E300-46E7-A162-CA3424F97BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC800C2C-E300-46E7-A162-CA3424F97BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
