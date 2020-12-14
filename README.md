@@ -20,3 +20,9 @@ There is a simpl listener console App too that can listen for a connection reque
 As already mentioned the code that "wraps" the device is not portable, it is managed and requires a system that can run that. This code is not intended to be used as-is by embedded systems but rather serve as a rich easily debuggable code base that can be used to identify, isolate and understand subtle issues that might be very time consuming to understand when encountered in a microcontroller environment.
 
 The goal with this is therefore to supoport the creation of refence code that can be used to develop robust native code for leveraging this versatile device.
+
+Adding more AT commands and queries is pretty straightforward, the model used is one that converts the response from the device into an arrays of strings, each corresponding to a CRLF terminated text block in the reponse, a complete response is istelf ended by the OK and CRLF sequence thus signalling the completion of the array. Methods you add can simply return this string[] for use by your app or you can devise a meaningful class to represent the results rather than just string[].
+
+The `GetVersionInfo` AT request does this and returns a `VersionInfo` object.
+
+
