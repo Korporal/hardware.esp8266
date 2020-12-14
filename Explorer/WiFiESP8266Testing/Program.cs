@@ -47,9 +47,13 @@ namespace WiFiESP8266Testing
 
                 device.Start();
 
-                var ram = device.Basic.GetFreeRam();
+                device.Basic.FactoryReset();
 
-                device.Basic.Restart();
+                var res = device.Basic.Restart();
+
+                device.Basic.DisableEcho();
+
+                var ram = device.Basic.GetFreeRam();
 
                 var info = device.Basic.GetVersionInfo();
 
@@ -59,8 +63,11 @@ namespace WiFiESP8266Testing
 
                 device.WiFi.SetWiFiMode(WiFiMode.Station);
 
-                var points = device.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true).OrderByDescending(point => point.SignalStrength);
+                var stn = device.WiFi.GetStationName();
 
+                var set = device.WiFi.SetStationName("The Tardis");
+
+                var points = device.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true).OrderByDescending(point => point.SignalStrength);
 
                 for (int X=0; X < 100; X++)
                 {

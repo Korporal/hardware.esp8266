@@ -77,6 +77,11 @@ namespace Steadsoft.Devices.WiFi.ESP8266
 
             return points;
         }
+
+        public override string ToString()
+        {
+            return $"{SSID} ({Encryption})";
+        }
     }
 
 }

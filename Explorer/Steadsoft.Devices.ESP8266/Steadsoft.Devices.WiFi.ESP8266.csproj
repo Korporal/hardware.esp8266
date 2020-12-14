@@ -55,6 +55,7 @@
     <Compile Include="Classes\SocketReceiveArgs.cs" />
     <Compile Include="Classes\StationInfo.cs" />
     <Compile Include="Classes\TcpIp.cs" />
+    <Compile Include="Classes\VersionInfo.cs" />
     <Compile Include="Classes\WiFi.cs" />
     <Compile Include="Classes\WiFiConnectEventArgs.cs" />
     <Compile Include="Enums\AccessPointEncryption.cs" />

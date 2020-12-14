@@ -14,6 +14,32 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             device = Device;
         }
 
+        public string GetStationName()
+        {
+            try
+            {
+                device.Execute($"{AT.WiFiCommands.GET_STATION_NAME}", OK);
+                return ResponseLine.CopyResponses(device.results)[0].Split(':')[1];
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+
+        }
+        public string[] SetStationName(string Name)
+        {
+            try
+            {
+                device.Execute($"{AT.WiFiCommands.SET_STATION_NAME}\"{Name}\"", OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+
+        }
 
         public void SetWiFiMode(WiFiMode Mode)
         {

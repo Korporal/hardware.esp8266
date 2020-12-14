@@ -42,6 +42,8 @@
             internal const string LIST_ACCESS_POINTS = "AT+CWLAP";
             internal const string GET_CONNECTED_STATION_IP = "AT+CWLIF";
             internal const string UPDATE_FIRMWARE_OTA = "AT+CIUPDATE";
+            internal const string GET_STATION_NAME = "AT+CWHOSTNAME?";
+            internal const string SET_STATION_NAME = "AT+CWHOSTNAME=";
         }
 
         internal static class TcpIpCommands

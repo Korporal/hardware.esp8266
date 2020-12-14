@@ -23,12 +23,12 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             }
         }
 
-        public string[] GetVersionInfo()
+        public VersionInfo GetVersionInfo()
         {
             try
             {
                 device.Execute(AT.BasicCommands.GET_VERSION_INFO, OK);
-                return ResponseLine.CopyResponses(device.results);
+                return new VersionInfo(ResponseLine.CopyResponses(device.results));
             }
             finally
             {
