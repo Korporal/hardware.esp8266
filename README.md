@@ -23,7 +23,6 @@ The goal with this is therefore to supoport the creation of refence code that ca
 
 Adding more AT commands and queries is pretty straightforward, the model used is one that converts the response from the device into an arrays of strings, each corresponding to a CRLF terminated text block in the reponse, a complete response is istelf ended by the OK and CRLF sequence thus signalling the completion of the array. Methods you add can simply return this string[] for use by your app or you can devise a meaningful class to represent the results rather than just string[].
 
-The `GetVersionInfo` AT request does this and returns a `VersionInfo` object as seen here: https://github.com/Korporal/hardware.esp8266/blob/main/Explorer/CoreTestApp/Program.cs#L54
-
+The `GetVersionInfo` AT request does this and returns a `VersionInfo` object.
 
 
