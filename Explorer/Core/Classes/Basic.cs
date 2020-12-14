@@ -127,6 +127,43 @@ namespace Steadsoft.ESP8266
             }
         }
 
+        public string[] GetCurrentUARTConfig()
+        {
+            try
+            {
+                device.Execute(AT.BasicCommands.NO_FLASH.GET_CURR_UART_CONFIG, OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
 
+        public string[] GetDefaultUARTConfig()
+        {
+            try
+            {
+                device.Execute(AT.BasicCommands.FLASH.GET_DEF_UART_CONFIG, OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
+
+        public string[] GetVDDRFPower()
+        {
+            try
+            {
+                device.Execute(AT.BasicCommands.GET_VDD_RF_POWER, OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
     }
 }

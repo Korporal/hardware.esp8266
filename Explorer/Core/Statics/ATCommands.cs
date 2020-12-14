@@ -13,18 +13,20 @@
             internal const string GET_FREE_RAM = "AT+SYSRAM?";
             internal const string GET_ADC_VALUE = "AT+SYSADC?";
             internal const string SET_SLEEP_MODE = "AT+SLEEP=";
+            internal const string GET_VDD_RF_POWER = "AT+RFVDD?";
             /// <summary>
             /// Defines commands that result in the device's flash memory being updated.
             /// </summary>
             internal static class FLASH
             {
-
+                internal const string GET_DEF_UART_CONFIG = "AT+UART_DEF?";
             }
             /// <summary>
             /// Defines commands that do not result in the device's flash memory being updated.
             /// </summary>
             internal static class NO_FLASH
             {
+                internal const string GET_CURR_UART_CONFIG = "AT+UART_CUR?";
             }
         }
 

@@ -49,6 +49,10 @@ namespace WiFiESP8266Testing
 
                 device.Basic.DisableEcho();
 
+                var uartc = device.Basic.GetCurrentUARTConfig();
+                var uartd = device.Basic.GetDefaultUARTConfig();
+                var powvdd = device.Basic.GetVDDRFPower();
+
                 var ram = device.Basic.GetFreeRam();
 
                 var info = device.Basic.GetVersionInfo();
