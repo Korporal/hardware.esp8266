@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using static Steadsoft.ESP8266.Constants;

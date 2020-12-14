@@ -1,5 +1,4 @@
-﻿using System;
-using static Steadsoft.ESP8266.ResponseStrings;
+﻿using static Steadsoft.ESP8266.ResponseStrings;
 
 namespace Steadsoft.ESP8266
 {

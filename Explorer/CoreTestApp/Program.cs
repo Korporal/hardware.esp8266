@@ -1,10 +1,8 @@
 ﻿using Steadsoft.ESP8266;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Net;
 using System.Threading;
 
 namespace WiFiESP8266Testing

@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Steadsoft.ESP8266;
 using Steadsoft.IO;
 using System;
 
