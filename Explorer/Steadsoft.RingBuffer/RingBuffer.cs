@@ -235,7 +235,7 @@ namespace Steadsoft.IO
             {
                 CopyBytes(Data, 0, Buffer, write_offset, ContiguousFreeSpace);
                 local_index += ContiguousFreeSpace;
-                LengthToWrite = LengthToWrite - ContiguousFreeSpace;
+                LengthToWrite -= ContiguousFreeSpace;
                 FinishFastRecv(ContiguousFreeSpace);
 #if INTEGRITY_CHECKING
                 IntegrityCheck();
@@ -336,7 +336,7 @@ namespace Steadsoft.IO
             Pattern = Pattern ?? throw new ArgumentNullException(nameof(Pattern));
 
             if (Pattern.Length == 0)
-                throw new ArgumentException("The array must not be empty.", nameof(UsedBytes));
+                throw new ArgumentException("The array must not be empty.", nameof(Pattern));
 
             MatchedLength = 0;
 
@@ -441,7 +441,7 @@ namespace Steadsoft.IO
 
                 CopyBytes(Buffer, read_offset, Data, 0, ContiguousUsedSpace);
                 local_index += ContiguousUsedSpace;
-                LengthToRead = LengthToRead - ContiguousUsedSpace;
+                LengthToRead -= ContiguousUsedSpace;
 
                 if (Consume)
                     FinishFastSend(ContiguousUsedSpace);
@@ -793,10 +793,10 @@ namespace Steadsoft.IO
         private static void CopyBytes(Array Source, int SourceOffset, Array Target, int TargetOffset, int LengthToCopy)
         {
             if (Source.Length - SourceOffset < LengthToCopy)
-                throw new ArgumentOutOfRangeException("The source buffer has insufficient space to satisfy the copy request.");
+                throw new ArgumentOutOfRangeException(nameof(Source), "The source buffer has insufficient space to satisfy the copy request.");
 
             if (Target.Length - TargetOffset < LengthToCopy)
-                throw new ArgumentOutOfRangeException("The target buffer has insufficient space to satisfy the copy request.");
+                throw new ArgumentOutOfRangeException(nameof(Source), "The target buffer has insufficient space to satisfy the copy request.");
 
             System.Buffer.BlockCopy(Source, SourceOffset, Target, TargetOffset, LengthToCopy);
 

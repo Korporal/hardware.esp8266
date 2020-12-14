@@ -5,11 +5,11 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
-using static Steadsoft.Devices.WiFi.ESP8266.Constants;
-using static Steadsoft.Devices.WiFi.ESP8266.Constants.Chars;
-using static Steadsoft.Devices.WiFi.ESP8266.ResponseStrings;
+using static Steadsoft.ESP8266.Constants;
+using static Steadsoft.ESP8266.Constants.Chars;
+using static Steadsoft.ESP8266.ResponseStrings;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     /// <summary>
     /// Represents an ESP8266 WiFi microchip originally manufactured by Espressif Systems.

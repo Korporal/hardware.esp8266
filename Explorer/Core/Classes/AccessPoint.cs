@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
-using static Steadsoft.Devices.WiFi.ESP8266.ResultPrefix;
+using static Steadsoft.ESP8266.ResultPrefix;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     public sealed class AccessPoint : ResponseLine
     {

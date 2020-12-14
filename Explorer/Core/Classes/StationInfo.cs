@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     /// <summary>
     /// Describes a connected access point.

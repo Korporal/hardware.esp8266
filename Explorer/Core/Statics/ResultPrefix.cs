@@ -1,4 +1,4 @@
-﻿namespace Steadsoft.Devices.WiFi.ESP8266
+﻿namespace Steadsoft.ESP8266
 {
     /// <summary>
     /// Identifying prefixes that appear at the start of response values for various AT commands.

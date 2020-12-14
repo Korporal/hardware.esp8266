@@ -1,4 +1,4 @@
-﻿using Steadsoft.Devices.WiFi.ESP8266;
+﻿using Steadsoft.ESP8266;
 using System;
 using System.Diagnostics;
 using System.IO;

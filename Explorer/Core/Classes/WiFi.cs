@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
-using static Steadsoft.Devices.WiFi.ESP8266.ResponseStrings;
-using static Steadsoft.Devices.WiFi.ESP8266.ResultPrefix;
+using static Steadsoft.ESP8266.ResponseStrings;
+using static Steadsoft.ESP8266.ResultPrefix;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     public sealed class WiFi
     {

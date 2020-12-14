@@ -1,4 +1,4 @@
-﻿namespace Steadsoft.Devices.WiFi.ESP8266
+﻿namespace Steadsoft.ESP8266
 {
     public enum AccessPointEncryption
     {

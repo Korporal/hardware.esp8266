@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     [Flags]
     public enum AccessPointOptions

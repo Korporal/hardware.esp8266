@@ -3,7 +3,7 @@ using System;
 using System.IO.Ports;
 using System.Threading;
 
-namespace Steadsoft.Devices.WiFi.ESP8266
+namespace Steadsoft.ESP8266
 {
     /// <summary>
     /// 
