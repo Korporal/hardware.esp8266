@@ -89,6 +89,25 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             }
         }
 
+        /// <summary>
+        /// Examines the ring buffer to ascertain if there is anything recognizable that can be processed.
+        /// </summary>
+        /// <remarks>
+        /// The ESP8266 device has numerous idiosyncracies some are clear from the documentation whereas others are
+        /// visible when using the device. All received data is written to the COM port's receive buffer (a ring buffer).
+        /// This includes command responses as well as received TCP data sent by a connected sending system. Command responses
+        /// are examined based on the specific nature of the response text and terminating strings or characters. 
+        /// Received IP data (that is pure socket based received data sent from a connected sender) is extracted and written
+        /// to a ring buffer dedicated to that connected socket. The app itself uses a handler to processes received byte blocks
+        /// that are sent over TCP IP.
+        /// Most commands result in a series of string results (each terminated by CRLF) which is eventually terminated by "OK" and CRLF.
+        /// The response processing is therefore to basically extract each CRLF text line and create an array of strings, this process itself
+        /// ends when the "OK" sentinel has been encountered.
+        /// Failed commands do not return "OK" but usually "FAIL" or "ERROR" and some commands result in "ready" being sent back.
+        /// The processing is therefore broken down on this basis.
+        /// </remarks>
+        /// <param name="Sender"></param>
+        /// <param name="Args"></param>
         private void OnDataReceived(object Sender, ComPortReceiveEventArgs Args)
         {
             bool has_message = false;

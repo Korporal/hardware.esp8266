@@ -114,7 +114,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
             }
         }
 
-        public void UpdateFirmware(Update Mode)
+        public void UpdateFirmware()
         {
             try
             {
@@ -127,6 +127,7 @@ namespace Steadsoft.Devices.WiFi.ESP8266
                 device.results.Clear();
             }
         }
+
 
     }
 }

@@ -44,6 +44,7 @@
             internal const string UPDATE_FIRMWARE_OTA = "AT+CIUPDATE";
             internal const string GET_STATION_NAME = "AT+CWHOSTNAME?";
             internal const string SET_STATION_NAME = "AT+CWHOSTNAME=";
+
         }
 
         internal static class TcpIpCommands
@@ -52,6 +53,9 @@
             internal const string SET_SOCKET_CONNECT_MODE = "AT+CIPMUX=";
             internal const string SOCKET_CONNECT = "AT+CIPSTART=";
             internal const string SOCKET_DISCONNECT = "AT+CIPCLOSE";
+            internal const string GET_SNTP_TIME = "AT+CIPSNTPTIME?";
+            internal const string GET_CONNECTION_STATUS = "AT+CIPSTATUS";
+
         }
     }
 

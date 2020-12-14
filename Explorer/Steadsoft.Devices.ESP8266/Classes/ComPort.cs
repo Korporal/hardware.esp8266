@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace Steadsoft.Devices.WiFi.ESP8266
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ComPort : IRingBufferLog, IAsyncIO
     {
         private volatile bool busy; // helps handle the ESP8266's 'busy p...' and 'busy s...' responses.

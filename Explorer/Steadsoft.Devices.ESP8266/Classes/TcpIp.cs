@@ -76,5 +76,33 @@ namespace Steadsoft.Devices.WiFi.ESP8266
                 device.results.Clear();
             }
         }
+
+        public string[] GetSNTPTime()
+        {
+            try
+            {
+                device.Execute(AT.TcpIpCommands.GET_SNTP_TIME, OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
+
+        public string[] GetConnectionStatus()
+        {
+            try
+            {
+                device.Execute(AT.TcpIpCommands.GET_CONNECTION_STATUS, OK);
+                return ResponseLine.CopyResponses(device.results);
+            }
+            finally
+            {
+                device.results.Clear();
+            }
+        }
+
+
     }
 }
