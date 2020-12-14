@@ -25,17 +25,19 @@ namespace Steadsoft.ESP8266
             if (String.IsNullOrWhiteSpace(PortName)) throw new ArgumentException("The name must have a value.", nameof(PortName));
             if (Settings == null) throw new ArgumentNullException(nameof(Settings));
 
-            if (Settings.ReceiveBufferCapacity <= 0) throw new ArgumentException($"The supplied buffer capacity ({Settings.ReceiveBufferCapacity}) must be greater than zero.", nameof(Settings.ReceiveBufferCapacity));
-            if (Settings.BusyWaitPeriod <= 0) throw new ArgumentException($"The supplied busy wait period ({Settings.BusyWaitPeriod}) must be greater than zero.", nameof(Settings.BusyWaitPeriod));
-            if (Settings.QuoteChar != null && Settings.QuoteChar.Length > 1) throw new ArgumentException($"The supplied quote character ({Settings.QuoteChar}) must be either null or a single character.", nameof(Settings.QuoteChar));
+            if (Settings.ReceiveBufferCapacity <= 0) throw new ArgumentException(nameof(Settings.ReceiveBufferCapacity), $"The supplied buffer capacity ({Settings.ReceiveBufferCapacity}) must be greater than zero.");
+            if (Settings.BusyWaitPeriod <= 0) throw new ArgumentException(nameof(Settings.BusyWaitPeriod), $"The supplied busy wait period ({Settings.BusyWaitPeriod}) must be greater than zero.");
+            if (Settings.QuoteChar != null && Settings.QuoteChar.Length > 1) throw new ArgumentException(nameof(Settings.QuoteChar), $"The supplied quote character ({Settings.QuoteChar}) must be either null or a single character.");
 
-            port = new SerialPort();
-            port.PortName = PortName;
-            port.BaudRate = Settings.BaudRate;
-            port.Parity = Settings.Parity;
-            port.DataBits = Settings.DataBits;
-            port.StopBits = Settings.StopBits;
-            port.Handshake = Settings.FlowControl;
+            port = new SerialPort
+            {
+                PortName = PortName,
+                BaudRate = Settings.BaudRate,
+                Parity = Settings.Parity,
+                DataBits = Settings.DataBits,
+                StopBits = Settings.StopBits,
+                Handshake = Settings.FlowControl
+            };
             this.Settings = Settings;
             receiveBuffer = new RingBuffer(Settings.ReceiveBufferCapacity);
             this.quoteChar = Settings.QuoteChar[0];

@@ -8,7 +8,7 @@ namespace Steadsoft.ESP8266
         public string SDK { get; private set; }
         public string Built { get; private set; }
         public string BIN { get; private set; }
-        private static string SEP = Environment.NewLine;
+        private static readonly string SEP = Environment.NewLine;
 
         public VersionInfo (string[] Values)
         {

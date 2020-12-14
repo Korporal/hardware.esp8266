@@ -5,7 +5,7 @@ namespace Steadsoft.ESP8266
 {
     public sealed class TcpIp
     {
-        private ESP8266 device;
+        private readonly ESP8266 device;
         internal TcpIp(ESP8266 Device)
         {
             device = Device;
@@ -14,7 +14,7 @@ namespace Steadsoft.ESP8266
         public string[] ConnectSocket(string IPAddress, int Port, int LinkID = 0)
         {
             if (LinkID < 0 || LinkID > 4)
-                throw new ArgumentOutOfRangeException("The supplied link ID must be between 0 (the default) and 4 inclusive.");
+                throw new ArgumentOutOfRangeException(nameof(LinkID), "The supplied link ID must be between 0 (the default) and 4 inclusive.");
 
             IPAddress = IPAddress ?? throw new ArgumentNullException(nameof(IPAddress));
 
@@ -27,9 +27,9 @@ namespace Steadsoft.ESP8266
                 string command;
 
                 if (LinkID == 0)
-                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}|TCP|,|{IPAddress}|,{Port.ToString()}";
+                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}|TCP|,|{IPAddress}|,{Port}";
                 else
-                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}{LinkID},|TCP|,|{IPAddress}|,{Port.ToString()}";
+                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}{LinkID},|TCP|,|{IPAddress}|,{Port}";
                 device.receive_buffers[LinkID].Clear();
                 device.Execute(command, OK);
                 return ResponseLine.CopyResponses(device.results);
@@ -44,7 +44,7 @@ namespace Steadsoft.ESP8266
         public string[] DisconnectSocket(int LinkID = -1)
         {
             if (LinkID < 0 || LinkID > 4)
-                throw new ArgumentOutOfRangeException("The supplied link ID must be between 0 (the default) and 4 inclusive.");
+                throw new ArgumentOutOfRangeException(nameof(LinkID), "The supplied link ID must be between 0 (the default) and 4 inclusive.");
 
             try
             {

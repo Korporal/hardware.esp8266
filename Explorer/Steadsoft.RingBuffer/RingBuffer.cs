@@ -776,12 +776,12 @@ namespace Steadsoft.IO
 #endif
             }
         }
-        private void IntegrityCheck()
-        {
-            if (write_offset == read_offset)
-                if (!Full && !Empty)
-                    Debugger.Break();
-        }
+        //private void IntegrityCheck()
+        //{
+        //    if (write_offset == read_offset)
+        //        if (!Full && !Empty)
+        //            Debugger.Break();
+        //}
         /// <summary>
         /// Internal helper that simply throws improved exception messages when an illegcal copy is attempted.
         /// </summary>

@@ -40,7 +40,6 @@ namespace Steadsoft.ESP8266
         public delegate void SocketReceiveEventHandler(object Sender, SocketReceiveEventArgs Args);
         public event WiFiConnectionEventHandler ConnectionChanged = delegate { };
         public event SocketReceiveEventHandler SocketReceive = delegate { };
-        private long invocationCount = 0;
         private readonly AutoResetEvent callCompleted = new AutoResetEvent(false);
         private string sentinel = ResponseStrings.OK;
 
@@ -78,9 +77,9 @@ namespace Steadsoft.ESP8266
                 if (!callCompleted.WaitOne(-1))
                     throw new TimeoutException("The response did not complete within the alloted time.");
 
-                if (results.Count == 1 && results[0] is InvalidOperationException)
+                if (results.Count == 1 && results[0] is InvalidOperationException exception1)
                 {
-                    InvalidOperationException exception = (InvalidOperationException)(results[0]);
+                    InvalidOperationException exception = exception1;
                     throw exception;
                 }
             }
@@ -111,13 +110,10 @@ namespace Steadsoft.ESP8266
         /// <param name="Args"></param>
         private void OnDataReceived(object Sender, ComPortReceiveEventArgs Args)
         {
-            bool has_message = false;
+            bool has_message;
             bool has_pattern = false;
-            int message_length = 0;
             int pattern_length = 0;
-            byte[] matching_bytes = null; ;
-
-            invocationCount++;
+            byte[] matching_bytes;
 
             // See if the buffer currently contains the chars CR LF
             // If not just exit, but if it does we remove the entire 
@@ -125,7 +121,7 @@ namespace Steadsoft.ESP8266
             // that block as a string. If all we find is just CR LF
             // then just remove these bytes and repeat.
 
-            has_message = TryFindMessage(out message_length, Args.Buffer, IPD);
+            has_message = TryFindMessage(out int message_length, Args.Buffer);
 
             if (has_message == false)
                 has_pattern = Args.Buffer.TryFindBytes(out pattern_length, CRLF);
@@ -135,10 +131,9 @@ namespace Steadsoft.ESP8266
                 if (has_pattern && pattern_length == 2)
                 {
                     has_pattern = false;
-                    has_message = false;
 
                     Args.Buffer.Read(2);
-                    has_message = TryFindMessage(out message_length, Args.Buffer, IPD);
+                    has_message = TryFindMessage(out message_length, Args.Buffer);
 
                     if (has_message == false)
                         has_pattern = Args.Buffer.TryFindBytes(out pattern_length, CRLF);
@@ -229,7 +224,7 @@ namespace Steadsoft.ESP8266
                         }
                 }
 
-                has_message = TryFindMessage(out message_length, Args.Buffer, IPD);
+                has_message = TryFindMessage(out message_length, Args.Buffer);
 
                 if (has_message == false)
                     has_pattern = Args.Buffer.TryFindBytes(out pattern_length, CRLF);
@@ -276,7 +271,7 @@ namespace Steadsoft.ESP8266
             return Port.PeekLog(Length);
         }
 
-        public bool TryFindMessage(out int MatchedLength, RingBuffer RingBuffer, byte[] Bytes)
+        public static bool TryFindMessage(out int MatchedLength, RingBuffer RingBuffer)
         {
                 MatchedLength = 0;
 

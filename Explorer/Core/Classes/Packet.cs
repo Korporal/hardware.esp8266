@@ -26,9 +26,8 @@ namespace Steadsoft.ESP8266
 
             if (parts.Length == 3)
             {
-                int len;
 
-                if (!int.TryParse(parts[1], out len))
+                if (!int.TryParse(parts[1], out int len))
                     throw new ArgumentException($"The packet's length prefix is invalid: {parts[1]}");
 
                 if (parts[2].Length == 0)
@@ -48,13 +47,10 @@ namespace Steadsoft.ESP8266
             }
             else
             {
-                int link;
-                int len;
-
-                if (!int.TryParse(parts[1], out link))
+                if (!int.TryParse(parts[1], out int link))
                     throw new ArgumentException($"The packet's link prefix is invalid: {parts[1]}");
 
-                if (!int.TryParse(parts[2], out len))
+                if (!int.TryParse(parts[2], out int len))
                     throw new ArgumentException($"The packet's length prefix is invalid: {parts[2]}");
 
                 if (parts[3].Length == 0)

@@ -55,7 +55,7 @@ namespace Steadsoft.UnitTests
 
             buffer.Read(4);
 
-            bool flag = buffer.TryFindBytes(out var length, 0x06, 0x07, 0x08);
+            buffer.TryFindBytes(out var length, 0x06, 0x07, 0x08);
 
             Assert.AreEqual(4, length);
         }
@@ -69,7 +69,7 @@ namespace Steadsoft.UnitTests
 
             buffer.Read(0); // illegal
 
-            bool flag = buffer.TryFindBytes(out var length, 0x06, 0x07, 0x08);
+            buffer.TryFindBytes(out var length, 0x06, 0x07, 0x08);
 
             Assert.AreEqual(8, length);
         }
@@ -82,8 +82,7 @@ namespace Steadsoft.UnitTests
             buffer.Write(0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F);
 
             buffer.Read(4);
-
-            bool flag = buffer.TryFindBytes(out var length, 0x06, 0x07, 0x08);
+            bool flag = buffer.TryFindBytes(out _, 0x06, 0x07, 0x08);
 
             Assert.AreEqual(true, flag);
         }
@@ -106,8 +105,7 @@ namespace Steadsoft.UnitTests
             }
 
             buffer.Read(3);
-
-            bool flag = buffer.TryFindBytes(out var length, 0x0F, 0x10, 0x11);
+            bool flag = buffer.TryFindBytes(out _, 0x0F, 0x10, 0x11);
 
             Assert.AreEqual(true, flag);
         }
@@ -131,7 +129,7 @@ namespace Steadsoft.UnitTests
 
             buffer.Read(3);
 
-            bool flag = buffer.TryFindBytes(out var length, 0x0F, 0x10, 0x11);
+            buffer.TryFindBytes(out var length, 0x0F, 0x10, 0x11);
 
             Assert.AreEqual(5, length);
         }
@@ -337,7 +335,7 @@ namespace Steadsoft.UnitTests
 
 
 
-        private byte[] GenerateByteBlock(byte Value, int Length)
+        private static byte[] GenerateByteBlock(byte Value, int Length)
         {
             byte[] bytes = new byte[Length];
 
@@ -349,7 +347,7 @@ namespace Steadsoft.UnitTests
             return bytes;
         }
 
-        private byte[] GenerateRandomLengthBlock(byte Value, int MaxLength)
+        private static byte[] GenerateRandomLengthBlock(byte Value, int MaxLength)
         {
             var size = (new Random().Next(1, MaxLength));
 

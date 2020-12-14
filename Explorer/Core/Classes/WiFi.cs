@@ -7,7 +7,7 @@ namespace Steadsoft.ESP8266
 {
     public sealed class WiFi
     {
-        private ESP8266 device;
+        private readonly ESP8266 device;
 
         internal WiFi(ESP8266 Device)
         {

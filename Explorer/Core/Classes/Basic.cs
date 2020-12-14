@@ -4,7 +4,7 @@ namespace Steadsoft.ESP8266
 {
     public sealed class Basic
     {
-        private ESP8266 device;
+        private readonly ESP8266 device;
         internal Basic (ESP8266 Device)
         {
             device = Device;
