@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Steadsoft.ESP8266.csproj" />
+    <ProjectReference Include="..\Steadsoft.RingBuffer\Steadsoft.IO.csproj" />
+  </ItemGroup>
+
+</Project>
