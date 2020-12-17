@@ -2,104 +2,102 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using System.Net;      //required
-using System.Net.Sockets;    //required
+using System.Net;      
+using System.Net.Sockets;    
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ServerTest
 {
-    class Program
+    /// <summary>
+    /// Waits for TCP connections to arrive and then for each of these periodically sends a random length byte block with each byte the same value.
+    /// This is used to drive and stress test ESP8266 devices and supporting code, primarily the robustness of the ring buffer design.
+    /// </summary>
+    public class  Program
     {
-        private static Random timeRand = new Random();
-        private static Random dataRand = new Random();
-        static void Main(string[] args)
+        private static readonly Random dataRand = new Random();
+        static async Task Main(string[] args)
         {
             Console.WindowHeight = 50;
             Console.WindowWidth = 50;
 
-            var ip = IPAddress.Parse("192.168.0.19");
+            var ip = IPAddress.Parse("192.168.0.19"); // whatever
 
-            //var ip = IPAddress.Any;
+            TcpListener listener = new TcpListener(ip, 4567); // just a random unused port number
 
-            TcpListener listener = new TcpListener(ip, 4567);
+            var tasks = new List<Task>();
 
-            // we set our IP address as server's address, and we also set the port: 9999
+            listener.Start();  
 
-            listener.Start();  // this will start the server
+            var listener_task = listener.AcceptSocketAsync();
 
+            var listener_task_id = listener_task.Id;
 
-            while (true)   //we wait for a connection
+            tasks.Add(listener_task);
+
+            while (NotEnded(listener_task))
             {
-                Console.WriteLine("Started listening for connection requests on: " + listener.LocalEndpoint.ToString());
+                Console.WriteLine($"Awaiting on {tasks.Count} tasks.");
 
-               using (TcpClient client = listener.AcceptTcpClient())                //if a connection exists, the server will accept it
+                var completed_task = await Task.WhenAny(tasks);
 
+                // A connection has been established
+
+                if (completed_task.Id == listener_task_id)
                 {
-                    Console.WriteLine($"{Time} - connection established on: " + client.Client.LocalEndPoint.ToString());
+                    var socket = ((Task<Socket>)(completed_task)).Result;
 
-                    client.ReceiveTimeout = 500;
+                    Console.WriteLine($"{socket.ProtocolType} connection established with {socket.RemoteEndPoint}");
 
-                    NetworkStream ns = client.GetStream(); //networkstream is used to send/receive messages
+                    tasks.Remove(completed_task); // We're done with this listener task.
 
-                    byte[] hello = new byte[100];   //any message must be serialized (converted to byte array)
-
-                    var txt = RandomString(4, 128);
-
-                    hello = Encoding.Default.GetBytes(txt);  //conversion string => byte array
-
-                    ns.Write(hello, 0, hello.Length);     //sending the message
-
-                    bool zero_was_read = false;
-
-                    while (client.Connected && !zero_was_read)  //while the client is connected, we look for incoming messages
+                    var generator_task = Task.Run(() =>
                     {
-                        try
+                        while (true)
                         {
-                            Thread.Sleep(1000);
-
-                            txt = RandomString(4, 1024);
-
-                            hello = Encoding.Default.GetBytes(txt);  //conversion string => byte array
-
-                            ns.Write(hello, 0, hello.Length);     //sending the message
-
-                            Console.WriteLine("Wrote " + hello.Length + " bytes.");
-
-                            byte[] msg = new byte[1024];     //the messages arrive as byte array
-
-                            int l = ns.Read(msg, 0, msg.Length);   //the same networkstream reads the message sent by the client
-
-                            if (l > 0)
-                                Console.WriteLine(Encoding.Default.GetString(msg).Trim('\x00')); //now , we write the message as string
-                            else
+                            try
                             {
-                                zero_was_read = true;
-                                Console.WriteLine($"{Time} - remote end has closed the connection.");
+                                socket.Send(RandomByteBlock(4,256));     
+                                Thread.Sleep(DateTime.Now.Millisecond); // Crude but avoids flooding with data at an uncontrolled rate.
+                            }
+                            catch (Exception e)
+                            {
+                                throw new InvalidOperationException($"{e.Message} ({socket.RemoteEndPoint})");
                             }
                         }
-                        catch (Exception e) when (e.Message.Contains("period of time"))
-                        {
-                            ; // we don't care
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Error: " + e.Message);
-                            client.Close();
-                        }
-                    }
+                    });
 
-                    Console.WriteLine($"{Time} - connection closed.");
+                    tasks.Add(generator_task);
+
+                    listener_task = listener.AcceptSocketAsync();
+
+                    listener_task_id = listener_task.Id;
+
+                    tasks.Add(listener_task);
+
+                    continue;
                 }
+
+                // A task that was sending data has terminted...
+
+                tasks.Remove(completed_task);
+
+                if (completed_task.Status == TaskStatus.Faulted)
+                    Console.WriteLine($"{completed_task.Exception.Message}({completed_task.Exception.InnerExceptions[0].Message})");
             }
         }
 
-        public static string Time
+        private static bool NotEnded(Task Task)
         {
-            get
-            {
-                return DateTime.Now.ToLongTimeString();
-            }
+            return !(Task.IsCanceled || Task.IsFaulted || Task.IsCompleted);
+        }
+
+        private static byte[] RandomByteBlock(int min, int max)
+        {
+            byte[] bytes;
+            var text = RandomString(4, 128);
+            bytes = Encoding.Default.GetBytes(text);
+            return bytes;
         }
 
         public static string RandomString(int min, int max)

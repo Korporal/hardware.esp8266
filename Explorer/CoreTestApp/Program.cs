@@ -10,6 +10,7 @@ namespace WiFiESP8266Testing
     class Program
     {
         private static ESP8266 device; // This is static simply because the Main is static, this is after all just a basic test app.
+        private static bool connected = false;
 
         static void Main(string[] args)
         {
@@ -45,9 +46,12 @@ namespace WiFiESP8266Testing
 
                 device.Start();
 
-                var res = device.Basic.Restart();
+                device.Basic.FactoryReset();
 
                 device.Basic.DisableEcho();
+
+                var res = device.Basic.Restart();
+
 
                 var uartc = device.Basic.GetCurrentUARTConfig();
                 var uartd = device.Basic.GetDefaultUARTConfig();
@@ -69,11 +73,14 @@ namespace WiFiESP8266Testing
 
                 var points = device.WiFi.GetAccessPoints(AccessPointOptions.AllOptions, true).OrderByDescending(point => point.SignalStrength);
 
+loop:
+                
                 for (int X = 0; X < 100; X++)
                 {
                     try
                     {
                         device.WiFi.ConnectToNetwork(args[1], args[2]);
+                        connected = true;
                         break;
                     }
                     catch (TimeoutException)
@@ -86,20 +93,29 @@ namespace WiFiESP8266Testing
 
                 var status = device.TcpIp.GetConnectionStatus();
 
-                device.TcpIp.SetConnectMode(SocketConnectMode.SingleConnection);
+                device.TcpIp.SetConnectMode(SocketConnectMode.MultipleConnections);
 
                 // Connect to a remote server, that server will just send data endlessly which
                 // the OnSocketReceive handler below will see.
 
-                device.TcpIp.ConnectSocket("192.168.0.19", 4567);
+                var scr1 = device.TcpIp.ConnectSocket(SocketType.UDP, "192.168.0.19", 4567, 1);
+                var scr2 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 2);
+                var scr3 = device.TcpIp.ConnectSocket(SocketType.UDP, "192.168.0.19", 4567, 3);
+                var scr4 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 4);
 
                 // Once connected go to sleep, all inbound IP traffic is asynchronoulsy processed and fed to the event handler
                 // This is all ultimetly done by the COM port's async callback.
 
-                Thread.Sleep(1);
+                Thread.Sleep(5000);
+
+                device.WiFi.DisconnectFromNetwork();
+
+                goto loop;
+
             }
             catch (Exception e)
             {
+
                 Console.WriteLine(e.Message);
             }
 
