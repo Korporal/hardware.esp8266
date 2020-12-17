@@ -11,7 +11,7 @@ namespace Steadsoft.ESP8266
             device = Device;
         }
 
-        public string[] ConnectSocket(string IPAddress, int Port, int LinkID = 0)
+        public int ConnectSocket(SocketType Type, string IPAddress, int Port, int LinkID = 0)
         {
             if (LinkID < 0 || LinkID > 4)
                 throw new ArgumentOutOfRangeException(nameof(LinkID), "The supplied link ID must be between 0 (the default) and 4 inclusive.");
@@ -27,12 +27,23 @@ namespace Steadsoft.ESP8266
                 string command;
 
                 if (LinkID == 0)
-                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}|TCP|,|{IPAddress}|,{Port}";
+                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}|{Type}|,|{IPAddress}|,{Port}";
                 else
-                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}{LinkID},|TCP|,|{IPAddress}|,{Port}";
+                    command = $"{AT.TcpIpCommands.SOCKET_CONNECT}{LinkID},|{Type}|,|{IPAddress}|,{Port}";
                 device.receive_buffers[LinkID].Clear();
                 device.Execute(command, OK);
-                return ResponseLine.CopyResponses(device.results);
+                string response = device.results[0] as string;
+
+                if (response.Contains("CONNECT"))
+                {
+                    if (response.Contains(','))
+                        return int.Parse(response.Substring(0,1));
+                    else
+                        return 0;
+                }
+
+                return -1;
+
             }
             finally
             {

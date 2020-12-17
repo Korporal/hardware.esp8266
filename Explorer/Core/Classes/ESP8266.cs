@@ -42,7 +42,14 @@ namespace Steadsoft.ESP8266
         private readonly AutoResetEvent callCompleted = new AutoResetEvent(false);
         private string sentinel = ResponseStrings.OK;
 
-        internal RingBuffer[] receive_buffers = { new RingBuffer(4096), new RingBuffer(4096), new RingBuffer(4096), new RingBuffer(4096) };
+        internal RingBuffer[] receive_buffers = 
+        { 
+            new RingBuffer(4096), 
+            new RingBuffer(4096),
+            new RingBuffer(4096),
+            new RingBuffer(4096), 
+            new RingBuffer(4096) 
+        };
 
         internal ArrayList results = new ArrayList();
         internal ComPort Port { get; private set; }
@@ -201,6 +208,11 @@ namespace Steadsoft.ESP8266
                             break;
                         }
                     case ResponseSentinel.NONE:
+                        {
+                            results.Add(matching_string);
+                            break;
+                        }
+                    case ResponseSentinel.CONNECT:
                         {
                             results.Add(matching_string);
                             break;
