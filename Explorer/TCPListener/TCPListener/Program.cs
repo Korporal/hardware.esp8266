@@ -6,32 +6,86 @@ using System.Text;
 using System.Net;      //required
 using System.Net.Sockets;    //required
 using System.Threading;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ServerTest
 {
-    class Program
+    class  Program
     {
         private static Random timeRand = new Random();
         private static Random dataRand = new Random();
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WindowHeight = 50;
             Console.WindowWidth = 50;
 
             var ip = IPAddress.Parse("192.168.0.19");
 
-            //var ip = IPAddress.Any;
-
             TcpListener listener = new TcpListener(ip, 4567);
 
-            // we set our IP address as server's address, and we also set the port: 9999
+            var tasks = new List<Task>();
 
-            listener.Start();  // this will start the server
+            listener.Start();  
 
+            var listener_task = listener.AcceptSocketAsync();
+
+            var listener_task_id = listener_task.Id;
+
+            tasks.Add(listener_task);
+
+            while (NotEnded(listener_task))
+            {
+                var completed_task = await Task.WhenAny(tasks);
+
+                // A connection has been established
+
+                if (completed_task.Id == listener_task_id)
+                {
+                    var socket = ((Task<Socket>)(completed_task)).Result;
+
+                    Console.WriteLine($"{socket.ProtocolType} connection established with {socket.RemoteEndPoint.ToString()}");
+
+                    tasks.Remove(completed_task); // We're done with this listener task.
+
+                    var generator_task = Task.Run(() =>
+                    {
+                        while (true)
+                        {
+                            try
+                            {
+                                var sent = socket.Send(Encoding.ASCII.GetBytes("HELLO"));
+                                Thread.Sleep(DateTime.Now.Millisecond); // Crude but avoids flooding with data at an uncontrolled rate.
+                            }
+                            catch (Exception e)
+                            {
+                                throw;
+                            }
+                        }
+                    });
+
+                    tasks.Add(generator_task);
+
+                    listener_task = listener.AcceptSocketAsync();
+
+                    listener_task_id = listener_task.Id;
+
+                    tasks.Add(listener_task);
+
+                    continue;
+                }
+
+                // A task that was sending data has terminted...
+
+                tasks.Remove(completed_task);
+
+                if (completed_task.Status == TaskStatus.Faulted)
+                    Console.WriteLine($"{completed_task.Exception.Message}({completed_task.Exception.InnerExceptions[0].Message})");
+            }
 
             while (true)   //we wait for a connection
             {
-                Console.WriteLine("Started listening for connection requests on: " + listener.LocalEndpoint.ToString());
+               Console.WriteLine("Started listening for connection requests on: " + listener.LocalEndpoint.ToString());
 
                using (TcpClient client = listener.AcceptTcpClient())                //if a connection exists, the server will accept it
 
@@ -92,6 +146,11 @@ namespace ServerTest
                     Console.WriteLine($"{Time} - connection closed.");
                 }
             }
+        }
+
+        private static bool NotEnded(Task Task)
+        {
+            return !(Task.IsCanceled || Task.IsFaulted || Task.IsCompleted);
         }
 
         public static string Time
