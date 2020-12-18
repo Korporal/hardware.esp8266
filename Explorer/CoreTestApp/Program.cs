@@ -98,9 +98,9 @@ loop:
                 // Connect to a remote server, that server will just send data endlessly which
                 // the OnSocketReceive handler below will see.
 
-                var scr1 = device.TcpIp.ConnectSocket(SocketType.UDP, "192.168.0.19", 4567, 1);
+                var scr1 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 1);
                 var scr2 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 2);
-                var scr3 = device.TcpIp.ConnectSocket(SocketType.UDP, "192.168.0.19", 4567, 3);
+                var scr3 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 3);
                 var scr4 = device.TcpIp.ConnectSocket(SocketType.TCP, "192.168.0.19", 4567, 4);
 
                 // Once connected go to sleep, all inbound IP traffic is asynchronoulsy processed and fed to the event handler

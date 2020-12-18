@@ -2,7 +2,7 @@
   "profiles": {
     "CoreTestApp": {
       "commandName": "Project",
-      "commandLineArgs": "COM5 HighChaparral canyongrand"
+      "commandLineArgs": "COM5 HighChaparral_2GEXT canyongrand"
     }
   }
 }

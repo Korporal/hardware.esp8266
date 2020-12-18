@@ -48,6 +48,18 @@ namespace Steadsoft.ESP8266
             if (Options.HasFlag(AccessPointOptions.FrequencyCalibration))
                 FrequencyCalibration = Convert.ToInt32(parts[sub++]);
 
+            if (Options.HasFlag(AccessPointOptions.PairwiseChiper))
+                PairwiseCipher = (CipherType)Convert.ToInt32(parts[sub++]);
+
+            if (Options.HasFlag(AccessPointOptions.GroupChipher))
+                GroupCipher = (CipherType)Convert.ToInt32(parts[sub++]);
+
+            if (Options.HasFlag(AccessPointOptions.Standards))
+                Standard = (WiFiStandard)Convert.ToInt32(parts[sub++]);
+
+            if (Options.HasFlag(AccessPointOptions.WPS))
+                WPS = Convert.ToBoolean(Convert.ToInt32(parts[sub++]));
+
             // other options never resulted in us seeing their values returned...
         }
 
@@ -62,7 +74,10 @@ namespace Steadsoft.ESP8266
         public int Channel { get; private set; }
         public int FrequencyOffset { get; private set; }
         public int FrequencyCalibration { get; private set; }
-
+        public CipherType PairwiseCipher { get; private set; }
+        public CipherType GroupCipher { get; private set; }
+        public WiFiStandard Standard { get; private set; }
+        public bool WPS { get; private set; }
         internal static AccessPoint[] CreateFromSource(AccessPointOptions Options, bool RSSIOrdering, ArrayList Source)
         {
             if (Source == null) throw new ArgumentNullException(nameof(Source));

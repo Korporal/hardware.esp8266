@@ -53,16 +53,19 @@ namespace ServerTest
 
                     var generator_task = Task.Run(() =>
                     {
+                        int bytes = 0;
+
                         while (true)
                         {
+
                             try
                             {
-                                socket.Send(RandomByteBlock(4,256));     
+                                bytes += socket.Send(RandomByteBlock(4,256));     
                                 Thread.Sleep(DateTime.Now.Millisecond); // Crude but avoids flooding with data at an uncontrolled rate.
                             }
                             catch (Exception e)
                             {
-                                throw new InvalidOperationException($"{e.Message} ({socket.RemoteEndPoint})");
+                                throw new InvalidOperationException($"{e.Message} ({socket.RemoteEndPoint}) {bytes} bytes were sent.");
                             }
                         }
                     });
